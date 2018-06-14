@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%= @title %></title><link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="\css/Animations.css">
+    <link rel="stylesheet" href="\css/site-wrapper.css">
+    <link rel="stylesheet" href="/css/master.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <!-- jQuery for sidebar -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <%= erb :'partials/navbar' %>
+
+    <%= yield %>
+  </body>
+</html>

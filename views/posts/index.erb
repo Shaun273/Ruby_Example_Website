@@ -1,0 +1,11 @@
+
+<h1>Posts Homepage</h1>
+
+<% @posts.each do |post| %>
+<div>
+  <h3><a href="/posts/<%= post[:id] %>"><%= post[:title] %></a></h3>
+
+</div>
+
+<% end %>
+<a href="/posts/new">New Post</a>
