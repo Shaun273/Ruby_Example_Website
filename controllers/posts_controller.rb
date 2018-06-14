@@ -42,30 +42,34 @@ class PostsController < Sinatra::Base
     # <h1>Hello World</h1>
     # <a href='/upload'>upload page</a>"
     @title = "Posts"
-    @posts = $posts
+    @posts = Post.all
     erb :"posts/index"
   end
 
   # new
   get '/posts/new' do
     # "PAGENEWPAGENEWPAGENEWPAGENEWPAGENEWPAGENEW"
-    @post = {
-      id: "",
-      title: "",
-      body: ""
-    }
+    @post = Post.new
     erb :"posts/new"
   end
 
   # Create
-  post "/posts" do
-    puts params
-    new_post = {
-      id: $posts.length,
-      title: params[:title],
-      body: params[:body]
-    }
-    $posts.push(new_post)
+  post "/posts/" do
+    # puts params
+    # new_post = {
+    #   id: $posts.length,
+    #   title: params[:title],
+    #   body: params[:body]
+    # }
+    # $posts.push(new_post)
+    # redirect "/posts"
+
+    post = Post.new
+    post.title = params[:title]
+    post.body = params[:body]
+
+    post.save
+
     redirect "/posts"
   end
 
@@ -73,9 +77,8 @@ class PostsController < Sinatra::Base
   get '/posts/:id' do
 
     id = params[:id].to_i
-    @post = $posts[id]
-    @title = @post[:title]
-
+    @post = Post.find id
+    @title = @post.title
     erb :"posts/show"
 
     # "<h3>This is the #{id} page.</h3>"
@@ -85,7 +88,7 @@ class PostsController < Sinatra::Base
   get '/posts/:id/edit' do
     id = params[:id].to_i
 
-    @post = $posts[id]
+    @post = Post.find id
 
     erb :"posts/edit"
   end
@@ -95,21 +98,21 @@ class PostsController < Sinatra::Base
     # "UPDATE PAGEUPDATE PAGEUPDATE PAGEUPDATE PAGEUPDATE PAGEUPDATE PAGE"
     id = params[:id].to_i
 
-    post = $posts[id]
+    post = Post.find id
 
-    post[:title] = params[:title]
-    post[:body] = params[:body]
+    post.title = params[:title]
+    post.body = params[:body]
 
-    $posts[id] = post
+    post.save
 
-    redirect "/posts"
+    redirect "/posts/#{id}"
 
   end
 
   # Destroy
   delete '/posts/:id' do
     id = params[:id].to_i
-    $posts.delete_at(id)
+    Post.destroy(id)
     redirect "/posts"
   end
 end
